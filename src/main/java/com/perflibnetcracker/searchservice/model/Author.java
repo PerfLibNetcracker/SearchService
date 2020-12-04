@@ -10,9 +10,9 @@ import javax.persistence.Id;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Author {
-    public Author(){}
 
     @Id
     @Column(name = "author_id")

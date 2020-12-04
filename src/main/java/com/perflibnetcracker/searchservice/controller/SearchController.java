@@ -1,8 +1,7 @@
 package com.perflibnetcracker.searchservice.controller;
 
 import com.perflibnetcracker.searchservice.model.Book;
-import com.perflibnetcracker.searchservice.service.HelloService;
-import com.perflibnetcracker.searchservice.service.implementation.BookServiceImpl;
+import com.perflibnetcracker.searchservice.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,19 +15,11 @@ import java.util.List;
 
 @Controller
 public class SearchController {
-    private final HelloService helloService;
 
+    private final BookService bookService;
     @Autowired
-    public SearchController(HelloService helloService) {
-        this.helloService = helloService;
-    }
-
-    @Autowired
-    private BookServiceImpl bookService;
-
-    @GetMapping("test")
-    private ResponseEntity<String> test() {
-        return ResponseEntity.ok(helloService.getHello());
+    public SearchController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @GetMapping("/api/service/search/find-all")
