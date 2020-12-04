@@ -1,6 +1,6 @@
-package com.perflibnetcracker.templateservice;
+package com.perflibnetcracker.searchservice;
 
-import com.perflibnetcracker.templateservice.service.implementation.HelloServiceImpl;
+import com.perflibnetcracker.searchservice.service.implementation.HelloServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

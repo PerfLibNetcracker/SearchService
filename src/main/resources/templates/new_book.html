@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Book</title>
+</head>
+<body>
+<form action="#" th:action="@{/api/service/search/book-create}" th:object="${book}" method="post">
+
+    <label for="name">Название книги</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Название книги">
+
+    <label for="price">Цена книги</label>
+    <input type="text" th:field="*{price}" id="price" placeholder="Цена книги">
+
+    <label for="totalViews">Кол-во просмотров книги</label>
+    <input type="text" th:field="*{totalViews}" id="totalViews" placeholder="Кол-во просмотров книги">
+
+    <label for="rating">Рейтинг книги</label>
+    <input type="text" th:field="*{rating}" id="rating" placeholder="Рейтинг книги">
+
+    <label for="genreId">ID жанра</label>
+    <input type="text" th:field="*{genreId}" id="genreId" placeholder="ID жанра">
+
+    <label for="authorId">ID автора</label>
+    <input type="text" th:field="*{authorId}" id="authorId" placeholder="ID автора">
+
+
+    <input type="submit" value="Добавить книгу">
+</form>
+</body>
+</html>
