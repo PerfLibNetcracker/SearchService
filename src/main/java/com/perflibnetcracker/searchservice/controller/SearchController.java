@@ -5,15 +5,13 @@ import com.perflibnetcracker.searchservice.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class SearchController {
 
     private final BookService bookService;
@@ -23,10 +21,9 @@ public class SearchController {
     }
 
     @GetMapping("/api/service/search/find-all")
-    public String findAll(Model model) {
+    public List<Book> findAll() {
         List<Book> books = bookService.findAll();
-        model.addAttribute("books", books);
-        return "books-list";
+        return books;
     }
 
     @GetMapping("/api/service/search/book-create")
