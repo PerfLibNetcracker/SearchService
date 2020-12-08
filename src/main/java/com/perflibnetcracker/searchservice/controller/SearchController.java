@@ -1,7 +1,9 @@
 package com.perflibnetcracker.searchservice.controller;
 
 import com.perflibnetcracker.searchservice.model.Book;
+import com.perflibnetcracker.searchservice.model.Genre;
 import com.perflibnetcracker.searchservice.service.BookService;
+import com.perflibnetcracker.searchservice.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,22 @@ import java.util.List;
 public class SearchController {
 
     private final BookService bookService;
+    private final GenreService genreService;
+
     @Autowired
-    public SearchController(BookService bookService) {
+    public SearchController(BookService bookService, GenreService genreService) {
+        this.genreService = genreService;
         this.bookService = bookService;
     }
 
     @GetMapping("/api/service/search/find-all")
     public List<Book> findAll() {
-        List<Book> books = bookService.findAll();
-        return books;
+        return bookService.findAll();
+    }
+
+    @GetMapping("/api/service/search/find-all-genres")
+    public List<Genre> findAllGenres() {
+        return genreService.findAll();
     }
 
     @GetMapping("/api/service/search/book-create")
