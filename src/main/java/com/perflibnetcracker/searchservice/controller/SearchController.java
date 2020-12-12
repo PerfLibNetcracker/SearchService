@@ -49,7 +49,7 @@ public class SearchController {
     @GetMapping("/api/service/search/{id}")
     public ResponseEntity<Book> findBookById(@PathVariable("id") Long id) {
         Book book = bookService.findById(id);
-        return new ResponseEntity<Book>(book, HttpStatus.OK);
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     @GetMapping("/api/service/search/book-delete/{id}")
