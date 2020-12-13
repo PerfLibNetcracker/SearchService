@@ -27,7 +27,7 @@ public class Book {
     private Double rating;
 
     @Column(name = "url_image")
-    private String URLImage;
+    private String urlImage;
 
     @Column(name = "genre_id")
     private Long genreId;
