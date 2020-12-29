@@ -1,6 +1,5 @@
 package com.perflibnetcracker.searchservice.service;
 
-import com.perflibnetcracker.searchservice.model.Book;
 import com.perflibnetcracker.searchservice.model.Genre;
 
 import java.util.List;
@@ -11,7 +10,7 @@ public interface GenreService {
 
     List<Genre> findAll();
 
-    Genre saveBook(Book book);
+    Genre saveGenre(Genre genre);
 
     void deleteById(Long id);
 }

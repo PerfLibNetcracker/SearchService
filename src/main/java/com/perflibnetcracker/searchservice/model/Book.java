@@ -5,7 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
@@ -32,7 +40,7 @@ public class Book {
     @Column(name = "genre_id")
     private Long genreId;
 
-    @Column(name="author_id")
+    @Column(name = "author_id")
     private Long authorId;
 
 

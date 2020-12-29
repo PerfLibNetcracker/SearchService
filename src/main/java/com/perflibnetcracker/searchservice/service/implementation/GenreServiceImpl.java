@@ -1,11 +1,8 @@
 package com.perflibnetcracker.searchservice.service.implementation;
 
-import com.perflibnetcracker.searchservice.model.Book;
 import com.perflibnetcracker.searchservice.model.Genre;
-import com.perflibnetcracker.searchservice.repository.BookRepository;
 import com.perflibnetcracker.searchservice.repository.GenreRepository;
 import com.perflibnetcracker.searchservice.service.GenreService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +19,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public Genre findById(Long id) {
-        return null;
+        return genreRepository.findById(id).get();
     }
 
     @Override
@@ -31,12 +28,12 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public Genre saveBook(Book book) {
-        return null;
+    public Genre saveGenre(Genre genre) {
+        return genreRepository.save(genre);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        genreRepository.deleteById(id);
     }
 }
