@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: searchservice-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1/$2/$3
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api/service/search/?(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: searchservice
+            port:
+              number: 8081

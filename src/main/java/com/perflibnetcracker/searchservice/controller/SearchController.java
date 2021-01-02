@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+// TODO: Все ROOT URL сделать по одной переменной (как в маппингах)
 @RestController
 @CrossOrigin(origins = "${spring.frontend.url}")
 public class SearchController {
@@ -29,28 +29,28 @@ public class SearchController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/api/service/search/find-all")
+    @GetMapping("${spring.urlmap}/find-all")
     public List<Book> findAll() {
         return bookService.findAll();
     }
 
-    @GetMapping("/api/service/search/find-all-genres")
+    @GetMapping("${spring.urlmap}/find-all-genres")
     public List<Genre> findAllGenres() {
         return genreService.findAll();
     }
 
-    @GetMapping("/api/service/search/book-create")
+    @GetMapping("${spring.urlmap}/book-create")
     public String createBookForm(Book book) {
         return "new_book";
     }
 
-    @PostMapping("/api/service/search/book-create")
+    @PostMapping("${spring.urlmap}/book-create")
     public String createBook(Book book) {
         bookService.saveBook(book);
         return "redirect:/api/service/search/find-all";
     }
 
-    @GetMapping("/api/service/search/{id}")
+    @GetMapping("${spring.urlmap}/{id}")
     public ResponseEntity<Book> findBookById(@PathVariable("id") Long id) {
         Book book = bookService.findById(id);
         return new ResponseEntity<>(book, HttpStatus.OK);
@@ -62,14 +62,14 @@ public class SearchController {
         return "redirect:/api/service/search/find-all";
     }
 
-    @GetMapping("/api/service/search/book-update/{id}")
+    @GetMapping("${spring.urlmap}/book-update/{id}")
     public String updateBookForm(@PathVariable("id") Long id, Model model) {
         Book book = bookService.findById(id);
         model.addAttribute("book", book);
         return "book-update";
     }
 
-    @PostMapping("/api/service/search/book-update")
+    @PostMapping("${spring.urlmap}/book-update")
     public String updateBook(Book book) {
         bookService.saveBook(book);
         return "redirect:/api/service/search/find-all";
