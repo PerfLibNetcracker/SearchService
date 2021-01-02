@@ -15,7 +15,7 @@ spec:
       containers:
         - name: searchservice
           imagePullPolicy: Never
-          image: search_server_perflib:latest
+          image: plyshka/search_server_perflib:latest
           ports:
             - containerPort: 8081
           env:
