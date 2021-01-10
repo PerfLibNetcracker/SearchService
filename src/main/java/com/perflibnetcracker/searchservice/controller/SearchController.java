@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-// TODO: Все ROOT URL сделать по одной переменной (как в маппингах)
 @RestController
 @CrossOrigin(origins = "${spring.frontend.url}")
 public class SearchController {
@@ -56,7 +55,7 @@ public class SearchController {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @GetMapping("/api/service/search/book-delete/{id}")
+    @GetMapping("${spring.urlmap}/book-delete/{id}")
     public String deleteBook(@PathVariable("id") Long id) {
         bookService.deleteById(id);
         return "redirect:/api/service/search/find-all";
