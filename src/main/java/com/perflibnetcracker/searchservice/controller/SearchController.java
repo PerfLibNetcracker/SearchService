@@ -1,9 +1,11 @@
 package com.perflibnetcracker.searchservice.controller;
 
+import com.perflibnetcracker.searchservice.model.Author;
 import com.perflibnetcracker.searchservice.model.Book;
 import com.perflibnetcracker.searchservice.model.Genre;
 import com.perflibnetcracker.searchservice.service.BookService;
 import com.perflibnetcracker.searchservice.service.GenreService;
+import com.perflibnetcracker.searchservice.service.implementation.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +24,13 @@ public class SearchController {
 
     private final BookService bookService;
     private final GenreService genreService;
+    private final BookServiceImpl bookServiceImpl;
 
     @Autowired
-    public SearchController(BookService bookService, GenreService genreService) {
+    public SearchController(BookService bookService, GenreService genreService, BookServiceImpl bookServiceImpl) {
         this.genreService = genreService;
         this.bookService = bookService;
+        this.bookServiceImpl = bookServiceImpl;
     }
 
     @GetMapping("${spring.urlmap}/find-all")
@@ -38,6 +42,9 @@ public class SearchController {
     public List<Genre> findAllGenres() {
         return genreService.findAll();
     }
+
+    @GetMapping("${spring.urlmap}/find-all-authors")
+    public List<Author> findAllAuthors() { return bookServiceImpl.findAllAuthors();}
 
     @GetMapping("${spring.urlmap}/book-create")
     public String createBookForm(Book book) {
