@@ -39,6 +39,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(book);
     }
 
+    @Override
     public List<Author> findAllAuthors() {
         List<Book> books = bookRepository.findAll();
         Set<Author> setOfGenres = new HashSet<>();

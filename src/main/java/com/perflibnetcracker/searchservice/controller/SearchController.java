@@ -24,13 +24,12 @@ public class SearchController {
 
     private final BookService bookService;
     private final GenreService genreService;
-    private final BookServiceImpl bookServiceImpl;
 
     @Autowired
-    public SearchController(BookService bookService, GenreService genreService, BookServiceImpl bookServiceImpl) {
+    public SearchController(BookService bookService, GenreService genreService) {
         this.genreService = genreService;
         this.bookService = bookService;
-        this.bookServiceImpl = bookServiceImpl;
+
     }
 
     @GetMapping("${spring.urlmap}/find-all")
@@ -44,7 +43,7 @@ public class SearchController {
     }
 
     @GetMapping("${spring.urlmap}/find-all-authors")
-    public List<Author> findAllAuthors() { return bookServiceImpl.findAllAuthors();}
+    public List<Author> findAllAuthors() { return bookService.findAllAuthors();}
 
     @GetMapping("${spring.urlmap}/book-create")
     public String createBookForm(Book book) {
