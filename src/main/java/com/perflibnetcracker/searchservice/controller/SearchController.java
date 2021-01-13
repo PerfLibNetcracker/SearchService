@@ -1,9 +1,11 @@
 package com.perflibnetcracker.searchservice.controller;
 
+import com.perflibnetcracker.searchservice.model.Author;
 import com.perflibnetcracker.searchservice.model.Book;
 import com.perflibnetcracker.searchservice.model.Genre;
 import com.perflibnetcracker.searchservice.service.BookService;
 import com.perflibnetcracker.searchservice.service.GenreService;
+import com.perflibnetcracker.searchservice.service.implementation.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-// TODO: Все ROOT URL сделать по одной переменной (как в маппингах)
 @RestController
 @CrossOrigin(origins = "${spring.frontend.url}")
 public class SearchController {
@@ -27,6 +28,7 @@ public class SearchController {
     public SearchController(BookService bookService, GenreService genreService) {
         this.genreService = genreService;
         this.bookService = bookService;
+
     }
 
     @GetMapping("${spring.urlmap}/find-all")
@@ -38,6 +40,9 @@ public class SearchController {
     public List<Genre> findAllGenres() {
         return genreService.findAll();
     }
+
+    @GetMapping("${spring.urlmap}/find-all-authors")
+    public List<Author> findAllAuthors() { return bookService.findAllAuthors();}
 
     @GetMapping("${spring.urlmap}/book-create")
     public String createBookForm(Book book) {
@@ -56,7 +61,7 @@ public class SearchController {
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @GetMapping("/api/service/search/book-delete/{id}")
+    @GetMapping("${spring.urlmap}/book-delete/{id}")
     public String deleteBook(@PathVariable("id") Long id) {
         bookService.deleteById(id);
         return "redirect:/api/service/search/find-all";

@@ -6,7 +6,9 @@ import com.perflibnetcracker.searchservice.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -24,7 +26,8 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public List<Genre> findAll() {
-        return genreRepository.findAll();
+        Set<Genre> set = new HashSet<>(genreRepository.findAll());
+        return List.copyOf(set);
     }
 
     @Override
