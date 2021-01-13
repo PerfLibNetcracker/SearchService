@@ -6,6 +6,7 @@ import com.perflibnetcracker.searchservice.service.RecommendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +31,8 @@ public class RecommendResolverController {
                 : recommendService.getPopularBooks();
     }
 
-    @GetMapping("${spring.urlmap}/recommend/{user-id}")
-    public List<Book> getRecommends(String userId) throws ServiceEmptyResultException {
+    @GetMapping("${spring.urlmap}/recommend/{userId}")
+    public List<Book> getRecommends(@PathVariable String userId) throws ServiceEmptyResultException {
         return recommendService.getUserBooks(userId);
     }
 }
