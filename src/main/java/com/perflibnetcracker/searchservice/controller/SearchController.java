@@ -5,7 +5,6 @@ import com.perflibnetcracker.searchservice.model.Book;
 import com.perflibnetcracker.searchservice.model.Genre;
 import com.perflibnetcracker.searchservice.service.BookService;
 import com.perflibnetcracker.searchservice.service.GenreService;
-import com.perflibnetcracker.searchservice.service.implementation.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
-@CrossOrigin(origins = "${spring.frontend.url}")
+@CrossOrigin
 public class SearchController {
 
     private final BookService bookService;
