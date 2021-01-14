@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "${spring.frontend.url}")
 public class SearchController {
 
     private final BookService bookService;

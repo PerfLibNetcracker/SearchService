@@ -15,7 +15,7 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "${spring.frontend.url}")
 public class RecommendResolverController {
     private final RecommendService recommendService;
 
