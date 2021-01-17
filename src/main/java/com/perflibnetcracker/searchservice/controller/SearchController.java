@@ -78,4 +78,15 @@ public class SearchController {
         bookService.saveBook(book);
         return "redirect:/api/service/search/find-all";
     }
+
+    @GetMapping("${spring.urlmap}/find-all-by-author/{author-name}")
+    public List<Book> findAllByAuthor(@PathVariable("author-name") String authorName) {
+        return bookService.findAllByAuthor(authorName);
+    }
+
+    @GetMapping("${spring.urlmap}/find-all-by-genre/{genre-name}")
+    public List<Book> findAllByGenre(@PathVariable("genre-name") String genreName) {
+        return bookService.findAllByGenre(genreName);
+    }
+
 }

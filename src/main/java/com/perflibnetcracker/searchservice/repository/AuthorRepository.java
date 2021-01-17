@@ -1,9 +1,9 @@
 package com.perflibnetcracker.searchservice.repository;
 
 import com.perflibnetcracker.searchservice.model.Author;
-import com.perflibnetcracker.searchservice.model.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GenreRepository extends JpaRepository<Genre, Long> {
-    Genre findOneByName(String genreName);
+
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+    Author findOneByFullName(String fullNameAuthor);
 }
