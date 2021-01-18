@@ -64,12 +64,12 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAllByAuthor(String authorName) {
         Author author = authorRepository.findOneByFullName(authorName);
-        return bookRepository.findAllByAuthorId(author.getAuthorId());
+        return bookRepository.findAllByAuthor(author);
     }
 
     @Override
     public List<Book> findAllByGenre(String genreName) {
         Genre genre = genreRepository.findOneByName(genreName);
-        return bookRepository.findAllByGenreId(genre.getGenreId());
+        return bookRepository.findAllByGenre(genre);
     }
 }
