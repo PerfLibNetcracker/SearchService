@@ -3,7 +3,9 @@ package com.perflibnetcracker.searchservice.service.implementation;
 import com.perflibnetcracker.searchservice.model.Author;
 import com.perflibnetcracker.searchservice.model.Book;
 import com.perflibnetcracker.searchservice.model.Genre;
+import com.perflibnetcracker.searchservice.repository.AuthorRepository;
 import com.perflibnetcracker.searchservice.repository.BookRepository;
+import com.perflibnetcracker.searchservice.repository.GenreRepository;
 import com.perflibnetcracker.searchservice.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +20,14 @@ public class BookServiceImpl implements BookService {
 
 
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
+    private final GenreRepository genreRepository;
 
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
+        this.genreRepository = genreRepository;
     }
 
     @Override
@@ -55,4 +61,15 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
+    @Override
+    public List<Book> findAllByAuthor(String authorName) {
+        Author author = authorRepository.findOneByFullName(authorName);
+        return bookRepository.findAllByAuthor(author);
+    }
+
+    @Override
+    public List<Book> findAllByGenre(String genreName) {
+        Genre genre = genreRepository.findOneByName(genreName);
+        return bookRepository.findAllByGenre(genre);
+    }
 }

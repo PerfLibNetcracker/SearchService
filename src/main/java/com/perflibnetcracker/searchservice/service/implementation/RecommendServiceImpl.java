@@ -39,8 +39,7 @@ public class RecommendServiceImpl implements RecommendService {
                         recommendServiceUrl + "/popular",
                         HttpMethod.GET,
                         null,
-                        new ParameterizedTypeReference<>() {
-                        });
+                        createParameterizedTypeReference());
         return getBooksByResponseDtos(response);
     }
 
@@ -51,8 +50,7 @@ public class RecommendServiceImpl implements RecommendService {
                         recommendServiceUrl + "/recommends/" + userId,
                         HttpMethod.GET,
                         null,
-                        new ParameterizedTypeReference<>() {
-                        });
+                        createParameterizedTypeReference());
         return getBooksByResponseDtos(response);
     }
 
@@ -63,8 +61,7 @@ public class RecommendServiceImpl implements RecommendService {
                         recommendServiceUrl + "/popular?number={number}",
                         HttpMethod.GET,
                         null,
-                        new ParameterizedTypeReference<>() {
-                        },
+                        createParameterizedTypeReference(),
                         amount);
         return getBooksByResponseDtos(response);
     }
@@ -79,5 +76,11 @@ public class RecommendServiceImpl implements RecommendService {
                 .map(dto -> Long.parseLong(dto.getItemId()))
                 .collect(Collectors.toList());
         return bookRepository.findBookByIdIn(bookIds);
+    }
+
+    // На Windows проект не соберётся без этого, на Linux всё нормально (прод на docker linux)
+    private ParameterizedTypeReference<List<RecommendReceivingItemDTO>> createParameterizedTypeReference() {
+        return new ParameterizedTypeReference<>() {
+        };
     }
 }
