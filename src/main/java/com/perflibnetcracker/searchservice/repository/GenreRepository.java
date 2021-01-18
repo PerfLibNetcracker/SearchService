@@ -1,6 +1,5 @@
 package com.perflibnetcracker.searchservice.repository;
 
-import com.perflibnetcracker.searchservice.model.Author;
 import com.perflibnetcracker.searchservice.model.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 
