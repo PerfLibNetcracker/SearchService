@@ -57,6 +57,7 @@ public class SearchController {
     @GetMapping("${spring.urlmap}/{id}")
     public ResponseEntity<Book> findBookById(@PathVariable("id") Long id) {
         Book book = bookService.findById(id);
+        bookService.addViewToBook(book);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
