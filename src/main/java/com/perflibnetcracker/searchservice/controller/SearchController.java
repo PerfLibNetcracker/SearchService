@@ -82,18 +82,13 @@ public class SearchController {
         return "redirect:/api/service/search/find-all";
     }
 
-    @GetMapping("${spring.urlmap}/find-all-by-author/{author-name}")
-    public List<Book> findAllByAuthor(@PathVariable("author-name") String authorName) {
-        return bookService.findAllByAuthor(authorName);
-    }
-
     @GetMapping("${spring.urlmap}/find-all-by-genre/{genre-name}")
     public List<Book> findAllByGenre(@PathVariable("genre-name") String genreName) {
         return bookService.findAllByGenre(genreName);
     }
 
-    @GetMapping("${spring.urlmap}/find-all-by-book-name/{book-name}")
-    public List<Book> findAllByBookName(@PathVariable("book-name") String bookName) {
-        return bookRepository.findByNameContainingIgnoreCase(bookName);
+    @GetMapping("${spring.urlmap}/find-all-by-book-name/{book-name-or-author}")
+    public List<Book> findAllByBookName(@PathVariable("book-name-or-author") String bookNameOrAuthorName) {
+        return bookRepository.findByNameContainingIgnoreCaseOrAuthorFullNameContainingIgnoreCase(bookNameOrAuthorName, bookNameOrAuthorName);
     }
 }
