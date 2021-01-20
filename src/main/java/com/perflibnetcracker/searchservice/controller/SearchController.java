@@ -3,6 +3,7 @@ package com.perflibnetcracker.searchservice.controller;
 import com.perflibnetcracker.searchservice.model.Author;
 import com.perflibnetcracker.searchservice.model.Book;
 import com.perflibnetcracker.searchservice.model.Genre;
+import com.perflibnetcracker.searchservice.repository.BookRepository;
 import com.perflibnetcracker.searchservice.service.BookService;
 import com.perflibnetcracker.searchservice.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,13 @@ public class SearchController {
 
     private final BookService bookService;
     private final GenreService genreService;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public SearchController(BookService bookService, GenreService genreService) {
+    public SearchController(BookService bookService, GenreService genreService, BookRepository bookRepository) {
         this.genreService = genreService;
         this.bookService = bookService;
-
+        this.bookRepository = bookRepository;
     }
 
     @GetMapping("${spring.urlmap}/find-all")
@@ -57,6 +59,7 @@ public class SearchController {
     @GetMapping("${spring.urlmap}/{id}")
     public ResponseEntity<Book> findBookById(@PathVariable("id") Long id) {
         Book book = bookService.findById(id);
+        bookService.addViewToBook(book);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
@@ -78,15 +81,19 @@ public class SearchController {
         bookService.saveBook(book);
         return "redirect:/api/service/search/find-all";
     }
-
-    @GetMapping("${spring.urlmap}/find-all-by-author/{author-name}")
-    public List<Book> findAllByAuthor(@PathVariable("author-name") String authorName) {
-        return bookService.findAllByAuthor(authorName);
-    }
-
+  
     @GetMapping("${spring.urlmap}/find-all-by-genre/{genre-name}")
     public List<Book> findAllByGenre(@PathVariable("genre-name") String genreName) {
         return bookService.findAllByGenre(genreName);
     }
 
+    @GetMapping("${spring.urlmap}/find-all-by-book-name/{book-name-or-author}")
+    public List<Book> findAllByBookNameOrAuthor(@PathVariable("book-name-or-author") String bookNameOrAuthorName) {
+        return bookRepository.findByNameContainingIgnoreCaseOrAuthorFullNameContainingIgnoreCase(bookNameOrAuthorName, bookNameOrAuthorName);
+    }
+
+    @GetMapping("${spring.urlmap}/find-all-new")
+    public List<Book> findAllNewBooks() {
+        return bookRepository.findAllByOrderByReleaseYearDesc();
+    }
 }

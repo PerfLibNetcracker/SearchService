@@ -41,4 +41,7 @@ public class Book extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id", insertable = false, updatable = false)
     private Genre genre;
+
+    @Column(name = "release_year")
+    private Long releaseYear;
 }

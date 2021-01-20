@@ -11,13 +11,13 @@ public interface BookService {
 
     List<Book> findAll();
 
-    Book saveBook(Book book);
+    void saveBook(Book book);
 
     void deleteById(Long id);
 
     List<Author> findAllAuthors();
 
-    List<Book> findAllByAuthor(String authorName);
-
     List<Book> findAllByGenre(String genreName);
+
+    void addViewToBook(Book book);
 }
