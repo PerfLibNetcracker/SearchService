@@ -41,8 +41,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book saveBook(Book book) {
-        return bookRepository.save(book);
+    public void saveBook(Book book) {
+        bookRepository.save(book);
     }
 
     @Override
@@ -50,8 +50,9 @@ public class BookServiceImpl implements BookService {
         List<Book> books = bookRepository.findAll();
         Set<Author> setOfGenres = new HashSet<>();
 
-        for(Book book: books)
+        for (Book book : books) {
             setOfGenres.add(book.getAuthor());
+        }
 
         return new ArrayList<>(List.copyOf(setOfGenres));
     }
@@ -71,5 +72,11 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAllByGenre(String genreName) {
         Genre genre = genreRepository.findOneByName(genreName);
         return bookRepository.findAllByGenre(genre);
+    }
+
+    @Override
+    public void addViewToBook(Book book) {
+        book.setTotalViews(book.getTotalViews() + 1);
+        bookRepository.save(book);
     }
 }
