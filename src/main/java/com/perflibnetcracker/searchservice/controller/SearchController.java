@@ -88,7 +88,12 @@ public class SearchController {
     }
 
     @GetMapping("${spring.urlmap}/find-all-by-book-name/{book-name-or-author}")
-    public List<Book> findAllByBookName(@PathVariable("book-name-or-author") String bookNameOrAuthorName) {
+    public List<Book> findAllByBookNameOrAuthor(@PathVariable("book-name-or-author") String bookNameOrAuthorName) {
         return bookRepository.findByNameContainingIgnoreCaseOrAuthorFullNameContainingIgnoreCase(bookNameOrAuthorName, bookNameOrAuthorName);
+    }
+
+    @GetMapping("${spring.urlmap}/find-all-new")
+    public List<Book> findAllNewBooks() {
+        return bookRepository.findAllByOrderByReleaseYearDesc();
     }
 }
